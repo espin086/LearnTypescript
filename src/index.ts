@@ -7,7 +7,7 @@ type Pizza = {
 type Order = {
     id: string
     pizza: Pizza
-    status: string
+    status: "ordered" | "complete"
 }
 
 type OrderQueue = {
@@ -42,7 +42,9 @@ function placeOrder(pizzaName: string): void {
             break;
         }
     }
-    
+    if (pizza) {
+        cashInRegister += pizza.price 
+    }
     if (!pizza) {
         console.log(`Pizza ${pizzaName} not found in menu`)
     } else {

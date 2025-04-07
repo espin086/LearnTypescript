@@ -20,6 +20,9 @@ function placeOrder(pizzaName) {
             break;
         }
     }
+    if (pizza) {
+        cashInRegister += pizza.price;
+    }
     if (!pizza) {
         console.log("Pizza ".concat(pizzaName, " not found in menu"));
     }
