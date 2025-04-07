@@ -7,10 +7,18 @@ var menu = [
 var orderQueue = [];
 var cashInRegister = 0;
 var orderId = 0;
+var nextPizzaId = 4; // Start after the last pre-defined pizza ID
 //Functions ----------------------------------------------------------------
-function addPizza(pizza) {
+function addPizza(name, price) {
+    var pizza = {
+        id: nextPizzaId,
+        name: name,
+        price: price
+    };
+    nextPizzaId++;
     menu.push(pizza);
-    console.log("Pizza ".concat(pizza.name, " added to menu"));
+    console.log("Pizza ".concat(pizza.name, " added to menu with ID: ").concat(pizza.id));
+    return pizza;
 }
 function placeOrder(pizzaName) {
     var pizza;
@@ -20,15 +28,28 @@ function placeOrder(pizzaName) {
             break;
         }
     }
-    if (pizza) {
-        cashInRegister += pizza.price;
-    }
+    
     if (!pizza) {
         console.log("Pizza ".concat(pizzaName, " not found in menu"));
+        return;
     }
-    else {
-        console.log("Order placed for ".concat(pizzaName));
-    }
+    
+    // Add the price to the cash register
+    cashInRegister += pizza.price;
+    
+    // Create a new order
+    orderId++;
+    var newOrder = {
+        id: orderId.toString(),
+        pizza: pizza,
+        status: "ordered"
+    };
+    
+    // Add the order to the queue
+    orderQueue.push(newOrder);
+    
+    console.log("Order placed for ".concat(pizzaName, ". Order ID: ").concat(newOrder.id));
+    return newOrder;
 }
 function completeOrder(orderId) {
     var order;
@@ -56,7 +77,8 @@ function getPizzaDetails(identifer) {
     }
 }
 //Main Program ------------------------------------------------------------
-addPizza({ id: 4, name: "Cheese", price: 15 });
+addPizza("Cheese", 15);
 placeOrder("Cheese");
 placeOrder("Cheese");
 console.log(cashInRegister);
+console.log("Order Queue:", orderQueue);
