@@ -101,3 +101,8 @@ To help with ensuring best practices in VSCode we go to the ```tsconfig.json``` 
 "noUnusedParameters": true,     
 "noImplicitReturns": true,    
 ```
+
+## FreeCodeCamp Resources
+
+
+- [Learn TypeScript - Full Course for Begineers](https://www.youtube.com/watch?v=SpwzRDUQ1GI)
