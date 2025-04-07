@@ -1,5 +1,6 @@
 // Custom Types ------------------------------------------------------------
 type Pizza = {
+    id: number
     name: string
     price: number
 }
@@ -18,9 +19,9 @@ type OrderQueue = {
 
 //Variable Creations --------------------------------------------------------
 const menu: Pizza[] = [
-    {name: "Margherita", price: 10},
-    {name: "Pepperoni", price: 12},
-    {name: "Veggie", price: 15},
+    {id: 1, name: "Margherita", price: 10},
+    {id: 2, name: "Pepperoni", price: 12},
+    {id: 3, name: "Veggie", price: 15},
 ]
 
 let orderQueue: Order[] = []
@@ -68,6 +69,14 @@ function completeOrder(orderId: string): string {
     return `Order ${orderId} is complete`;
 }
 
+function getPizzaDetails(identifer: string | number): Pizza | undefined {
+    if (typeof identifer === "string") {
+        return menu.find(pizza => pizza.name === identifer)
+    } else {
+        return menu.find(pizza => pizza.id === identifer)
+    }
+}
+
 //Main Program ------------------------------------------------------------
-addPizza({ name: "Cheese", price: 15 })
+addPizza({ id: 4, name: "Cheese", price: 15 })
 placeOrder("Cheese")
