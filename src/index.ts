@@ -71,9 +71,11 @@ function completeOrder(orderId: string): string {
 
 function getPizzaDetails(identifer: string | number): Pizza | undefined {
     if (typeof identifer === "string") {
-        return menu.find(pizza => pizza.name === identifer)
-    } else {
+        return menu.find(pizza => pizza.name.toLowerCase() === identifer.toLowerCase())
+    } else if (typeof identifer === "number") {
         return menu.find(pizza => pizza.id === identifer)
+    } else {
+        throw new Error("Invalid identifier it must be a string or number")
     }
 }
 
