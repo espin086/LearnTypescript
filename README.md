@@ -43,4 +43,43 @@ tsc --init
 
 Contains version of JavaScript that the compiler will use. Depending on where you want to deploy your applicaiton you can use a different version. 
 
-Module section has multiple sections. We set the source root directory to ```src``` in this section by convention. 
+Module section has multiple sections. We set the source root directory to ```src``` in this section by convention. There is also an outDir that we change to ```./dist``` by convention. We also: 
+
+- remove code from js files when compiled
+- ensure no js is emmitted if there is an an error when ts code compiles
+
+
+There are the basics of ```tsconfig.json```
+
+
+### Section 2: Debugging TS Applicaitons
+
+Configure ```tsconfig.json``` to create index mappings for ts to js code to help with debugging. 
+
+We need to create a configuration file to lanch the debugger in VSCode/Cursor, it looks like this: 
+
+```json
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/index.ts",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        }
+    ]
+}
+```
+
