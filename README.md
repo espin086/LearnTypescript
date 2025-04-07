@@ -20,6 +20,7 @@ Typescript was created by Microsoft to address the issues iwth JavaScirpt. Every
 - Refactoring...
 - Shorthand...
 
+Develop with more confidence by finding errors during compile tmie before it gets deployed. Productivity is much better including powerful auto completion. TypeScript increases employability in the job market, it is often table stakes for many companies. 
 
 Drawbacks of TS: 
 - Compilation step: as browsers do not understand TS code
