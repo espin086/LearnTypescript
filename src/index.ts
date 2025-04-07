@@ -27,13 +27,19 @@ const menu: Pizza[] = [
 let orderQueue: Order[] = []
 let cashInRegister: number = 0
 let orderId: number = 0
+let nextPizzaId: number = 4 // Start after the last pre-defined pizza ID
 
 //Functions ----------------------------------------------------------------
-function addPizza(pizza: Pizza): void {
+function addPizza(name: string, price: number): void {
+    const pizza: Pizza = {
+        id: nextPizzaId,
+        name,
+        price
+    }
+    nextPizzaId++
     menu.push(pizza)
-    console.log(`Pizza ${pizza.name} added to menu`)
+    console.log(`Pizza ${pizza.name} added to menu with ID: ${pizza.id}`)
 }
-
 
 function placeOrder(pizzaName: string): void {
     let pizza: Pizza | undefined;
@@ -43,21 +49,34 @@ function placeOrder(pizzaName: string): void {
             break;
         }
     }
-    if (pizza) {
-        cashInRegister += pizza.price 
-    }
+    
     if (!pizza) {
         console.log(`Pizza ${pizzaName} not found in menu`)
-    } else {
-        console.log(`Order placed for ${pizzaName}`)
+        return;
     }
+    
+    // Add the price to the cash register
+    cashInRegister += pizza.price
+    
+    // Create a new order
+    orderId++;
+    const newOrder: Order = {
+        id: orderId.toString(),
+        pizza: pizza,
+        status: "ordered"
+    }
+    
+    // Add the order to the queue
+    orderQueue.push(newOrder)
+    
+    console.log(`Order placed for ${pizzaName}. Order ID: ${newOrder.id}`)
 }
 
 function completeOrder(orderId: string): string {
     let order: Order | undefined;
-    for (let i = 0; i < orderQueue.length; i++) {
-        if (orderQueue[i].id === orderId) {
-            order = orderQueue[i];
+    for (let i = 0; i < orderQueue.length; i++) { // Loop through the orderQueue
+        if (orderQueue[i].id === orderId) { // Check if the orderId matches the order in the orderQueue
+            order = orderQueue[i];// If it does, set the order to the order in the orderQueue
             break;
         }
     }
@@ -80,5 +99,7 @@ function getPizzaDetails(identifer: string | number): Pizza | undefined {
 }
 
 //Main Program ------------------------------------------------------------
-addPizza({ id: 4, name: "Cheese", price: 15 })
+addPizza("Cheese", 15)
 placeOrder("Cheese")
+placeOrder("Cheese")
+console.log(cashInRegister)

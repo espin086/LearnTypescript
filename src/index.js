@@ -1,8 +1,8 @@
 //Variable Creations --------------------------------------------------------
 var menu = [
-    { name: "Margherita", price: 10 },
-    { name: "Pepperoni", price: 12 },
-    { name: "Veggie", price: 15 },
+    { id: 1, name: "Margherita", price: 10 },
+    { id: 2, name: "Pepperoni", price: 12 },
+    { id: 3, name: "Veggie", price: 15 },
 ];
 var orderQueue = [];
 var cashInRegister = 0;
@@ -32,9 +32,9 @@ function placeOrder(pizzaName) {
 }
 function completeOrder(orderId) {
     var order;
-    for (var i = 0; i < orderQueue.length; i++) {
-        if (orderQueue[i].id === orderId) {
-            order = orderQueue[i];
+    for (var i = 0; i < orderQueue.length; i++) { // Loop through the orderQueue
+        if (orderQueue[i].id === orderId) { // Check if the orderId matches the order in the orderQueue
+            order = orderQueue[i]; // If it does, set the order to the order in the orderQueue
             break;
         }
     }
@@ -44,6 +44,19 @@ function completeOrder(orderId) {
     order.status = "complete";
     return "Order ".concat(orderId, " is complete");
 }
+function getPizzaDetails(identifer) {
+    if (typeof identifer === "string") {
+        return menu.find(function (pizza) { return pizza.name.toLowerCase() === identifer.toLowerCase(); });
+    }
+    else if (typeof identifer === "number") {
+        return menu.find(function (pizza) { return pizza.id === identifer; });
+    }
+    else {
+        throw new Error("Invalid identifier it must be a string or number");
+    }
+}
 //Main Program ------------------------------------------------------------
-addPizza({ name: "Cheese", price: 15 });
+addPizza({ id: 4, name: "Cheese", price: 15 });
 placeOrder("Cheese");
+placeOrder("Cheese");
+console.log(cashInRegister);
