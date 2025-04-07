@@ -83,3 +83,21 @@ We need to create a configuration file to lanch the debugger in VSCode/Cursor, i
 }
 ```
 
+You can 'watch' variables in the debugging section to follow metrics. YOu can check your local scope and the global scope. 
+
+
+### Secion 3: Built-in Types
+
+TypeScript
+- any
+- unknown
+- never
+- enum
+- tuble
+
+To help with ensuring best practices in VSCode we go to the ```tsconfig.json``` and enable these settings: 
+```json
+"noUnusedLocals": true,             
+"noUnusedParameters": true,     
+"noImplicitReturns": true,    
+```
